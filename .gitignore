@@ -36,3 +36,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# pastas ignoradas do projeto
+Lib/
+.idea/
+.mvn/
+pom.xml/

@@ -56,23 +56,6 @@ public class MainClone {
                     System.err.println("Error registering card: " + e.getMessage());
                 }
 
-            } else if (option.equals("4")) {
-                System.out.println("When is your birthday? (YYYY-MM-DD): ");
-                LocalDate birthday = LocalDate.parse(reader.readLine());
-
-                System.out.println("Type the fullname: ");
-                String fullName = reader.readLine();
-
-                System.out.println("Type the email: ");
-                String email = reader.readLine();
-
-                try {
-                    insertAccoount(birthday, fullName, email);
-                    System.out.println("Account registered successfully in the database!");
-                } catch (SQLException e) {
-                    System.err.println("Error registering account: " + e.getMessage());
-                }
-
             } else if (option.equals("2")) {
                 System.out.println("Digite o número do seu cartão ou o nome do titular do cartão: ");
                 String cartaoAtual = reader.readLine();
@@ -90,6 +73,24 @@ public class MainClone {
                     } else{
                         System.out.println("dados do cartão: " + creditCardList.get(0).toString());
                     }
+
+                }
+
+            } else if (option.equals("4")) {
+                System.out.println("When is your birthday? (YYYY-MM-DD): ");
+                LocalDate birthday = LocalDate.parse(reader.readLine());
+
+                System.out.println("Type the fullname: ");
+                String fullName = reader.readLine();
+
+                System.out.println("Type the email: ");
+                String email = reader.readLine();
+
+                try {
+                    insertAccoount(birthday, fullName, email);
+                    System.out.println("Account registered successfully in the database!");
+                } catch (SQLException e) {
+                    System.err.println("Error registering account: " + e.getMessage());
                 }
 
 
