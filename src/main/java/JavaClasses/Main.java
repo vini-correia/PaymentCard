@@ -1,5 +1,9 @@
 package JavaClasses;
 
+import JavaClasses.Model.Account;
+import JavaClasses.Model.CreditCard;
+import JavaClasses.dao.ConnectionFactory;
+
 import java.sql.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,9 +15,7 @@ import java.util.List;
 
 public class Main {
 
-    private static final String URL = "jdbc:postgresql://localhost:3306/payment_card";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "vini240605";
+
 
     public static void main(String[] args) throws IOException, SQLException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -103,7 +105,7 @@ public class Main {
     private static void getCreditCardByNumber(String cartaoAtual) throws SQLException {
         String selectCardNumber = "select * from credit_card where card_number = ?";
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectCardNumber)) {
 
             preparedStatement.setString(1, cartaoAtual);
@@ -125,7 +127,7 @@ public class Main {
     public static void insertAccoount (LocalDate birthday, String fullName, String email) throws SQLException {
         String query = "INSERT INTO account (email, full_name,day_of_birthday) values (?,?,?)";
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)){
 
             preparedStatement.setString(1, email);
@@ -139,7 +141,7 @@ public class Main {
     public static void insertCredit_Card (String cardHolderName, String cardNumber, YearMonth expiryDate, double limit) throws SQLException {
         String query = "INSERT INTO credit_Card (card_Holder_Name, card_Number, expiry_Date, limit_amount) VALUES (?, ?, ?, ?)";
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, cardHolderName);
@@ -163,7 +165,7 @@ public class Main {
 
             List<String> cards = new ArrayList<>();
 
-            try (Connection conn = DriverManager.getConnection(URL,USER,PASSWORD);
+            try (Connection conn = ConnectionFactory.getConnection();
                  PreparedStatement stmt = conn.prepareStatement(getCreditCardByEmail)){
 
                 stmt.setString(1, fullName);

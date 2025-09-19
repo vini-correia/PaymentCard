@@ -1,4 +1,4 @@
-package JavaClasses;
+package JavaClasses.Model;
 
 import java.time.YearMonth;
 
