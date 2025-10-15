@@ -1,8 +1,13 @@
 package JavaClasses;
 
+import JavaClasses.Model.CreditCard;
 import JavaClasses.Service.AccountService;
+import JavaClasses.Service.CreditCardService;
 import JavaClasses.dao.AccountDao;
 import JavaClasses.dao.CreditCardDao;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.sql.*;
 import java.io.BufferedReader;
@@ -13,13 +18,21 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
+
 public class MainClone {
+    private static BufferedReader rd;
 
 //    private static final String URL = "jdbc:postgresql://localhost:3306/payment_card";
 //    private static final String USER = "postgres";
 //    private static final String PASSWORD = "vini240605";
 
     public static void main(String[] args) throws IOException, SQLException {
+
+        ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
+        CreditCard creditCard = context.getBean(CreditCard.class);
+        creditCard.setCardHolNumber(123);
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         AccountDao accountDao = new AccountDao();
@@ -40,27 +53,9 @@ public class MainClone {
             String option = reader.readLine();
 
             if (option.equals("1")) {
-                System.out.println("Type the card holder name: ");
-                String cardHolderName = reader.readLine();
+                CreditCardService creditCardService = new CreditCardService(reader, creditCardDao);
+                creditCardService.CreateCreditCard();
 
-                System.out.println("Type the card number: ");
-                String cardNumber = reader.readLine();
-
-                System.out.println("Type the card expiry date (YYYY-MM):");
-                YearMonth expiryDateValue = YearMonth.parse(reader.readLine());
-
-                System.out.println("escreva o limite do seu cartão: ");
-                double limitValue = Double.parseDouble(reader.readLine());
-//
-//                System.out.println("Type the account email for this card: ");
-//                String emailDoTitular = reader.readLine();
-
-                try {
-                    creditCardDao.insertCredit_Card(cardHolderName, cardNumber, expiryDateValue, limitValue );
-                    System.out.println("Card registered successfully in the database!");
-                } catch (SQLException e) {
-                    System.err.println("Error registering card: " + e.getMessage());
-                }
 
             } else if (option.equals("2")) {
                 System.out.println("Digite o número do seu cartão ou o nome do titular do cartão: ");
@@ -83,7 +78,7 @@ public class MainClone {
                 }
 
             } else if (option.equals("4")) {
-                AccountService accountService = new AccountService(reader);
+                AccountService accountService = new AccountService(reader, accountDao);
                 accountService.createAccount();
 
 

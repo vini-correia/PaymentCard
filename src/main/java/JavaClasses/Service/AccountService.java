@@ -14,9 +14,9 @@ public class AccountService {
 
     BufferedReader reader;
 
-    public AccountService(BufferedReader reader){
+    public AccountService(BufferedReader reader, AccountDao accountDao){
         this.reader = reader;
-        accountDao = new AccountDao();
+        this.accountDao = accountDao;
     }
 
 

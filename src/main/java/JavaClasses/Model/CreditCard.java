@@ -1,6 +1,11 @@
 package JavaClasses.Model;
 
+import JavaClasses.anotations.LogExecution;
+import org.springframework.stereotype.Component;
+
 import java.time.YearMonth;
+
+@Component
 
 public class CreditCard {
 
@@ -22,6 +27,7 @@ public class CreditCard {
         return cardHoldNumber;
     }
 
+    @LogExecution
     public void setCardHolNumber(int cardHolNumber) {
         this.cardHoldNumber = cardHoldNumber;
     }
