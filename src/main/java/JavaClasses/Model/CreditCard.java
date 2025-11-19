@@ -1,6 +1,6 @@
 package JavaClasses.Model;
 
-import JavaClasses.anotations.LogExecution;
+//import JavaClasses.anotations.LogExecution;
 import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
@@ -15,6 +15,8 @@ public class CreditCard {
     private double limit;
     private double balance;
 
+    public CreditCard() {}
+
     public CreditCard(String cardHoldName, String cardHoldNumber, YearMonth expiryDate, double balance, double limit ) {
         this.cardHoldName = cardHoldName;
         this.cardHoldNumber = cardHoldNumber;
@@ -27,7 +29,7 @@ public class CreditCard {
         return cardHoldNumber;
     }
 
-    @LogExecution
+    //@LogExecution
     public void setCardHolNumber(int cardHolNumber) {
         this.cardHoldNumber = cardHoldNumber;
     }

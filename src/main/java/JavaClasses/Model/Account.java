@@ -7,13 +7,8 @@ public class Account {
     private LocalDate dayOfBrithdat;
     private String fullName;
     private String email;
+    private Long id;
 
-    public Account(LocalDate dayOfBrithdat, String fullName, String email) {
-        this.dayOfBrithdat = dayOfBrithdat;
-        this.fullName = fullName;
-        this.email = email;
-
-    }
 
     public Account() {
 
@@ -42,6 +37,10 @@ public class Account {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

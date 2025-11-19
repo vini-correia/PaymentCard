@@ -1,6 +1,6 @@
 package JavaClasses;
 
-import JavaClasses.anotations.LogExecution;
+//import JavaClasses.anotations.LogExecution;
 
 import java.time.YearMonth;
 
@@ -34,7 +34,7 @@ public class CreditCard2 {
     public String getCardNumber() {
         return cardNumber;
     }
-    @LogExecution()
+    //@LogExecution()
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }

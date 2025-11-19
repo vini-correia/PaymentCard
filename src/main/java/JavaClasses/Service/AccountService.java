@@ -1,46 +1,48 @@
 package JavaClasses.Service;
 
-import JavaClasses.Model.Account;
+import JavaClasses.Account2;
 import JavaClasses.dao.AccountDao;
+import JavaClasses.repository.AccountRepository;
+import jakarta.persistence.metamodel.SingularAttribute;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
+
+@Service
 
 public class AccountService {
 
-    AccountDao accountDao;
+    public final AccountRepository accountRepository;
 
-    BufferedReader reader;
 
-    public AccountService(BufferedReader reader, AccountDao accountDao){
-        this.reader = reader;
-        this.accountDao = accountDao;
+
+    public AccountService(AccountRepository accountRepository){
+        this.accountRepository = accountRepository;
     }
 
 
-    public void createAccount () throws IOException {
-
-
-        Account account = new Account();
-
-        System.out.println("When is your birthday? (YYYY-MM-DD): ");
-        LocalDate birthday = LocalDate.parse(reader.readLine());
-
-        System.out.println("Type the fullname: ");
-        String fullName = reader.readLine();
-
-        System.out.println("Type the email: ");
-        String email = reader.readLine();
-
-        try {
-            accountDao.insertAccount(birthday, fullName, email);
-            System.out.println("Account registered successfully in the database!");
-        } catch (SQLException e) {
-            System.err.println("Error registering account: " + e.getMessage());
-        }
+    public Account2 createAccount (Account2 accontBody){
+        Account2 AccontCreated = accountRepository.save(accontBody);
+        return AccontCreated;
 
     }
+
+    public Account2 getAccountById(Long id) {
+
+        Optional<Account2> optionalAccount = accountRepository.findById(id);
+        return optionalAccount.orElse(null);
+
+
+    }
+
+
+
 
 }

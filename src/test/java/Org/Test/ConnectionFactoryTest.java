@@ -1,4 +1,4 @@
-package Org.exemple;
+package Org.Test;
 
 import JavaClasses.dao.ConnectionFactory;
 import org.junit.jupiter.api.Test;

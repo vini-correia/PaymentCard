@@ -1,2 +1,14 @@
 server:
   port: 8080
+
+spring:
+    datasource:
+      url: jdbc:postgresql://localhost:3306/payment_card
+      username: postgres
+      password: vini240605
+      driver-class-name: org.postgresql.Driver
+    jpa:
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true

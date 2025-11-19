@@ -1,43 +1,33 @@
 package JavaClasses.Service;
 
-import JavaClasses.dao.CreditCardDao;
+import JavaClasses.CreditCard2;
+import JavaClasses.repository.CreditCardRepository;
+import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.time.YearMonth;
+import java.util.Optional;
+
+@Service
 
 public class CreditCardService {
 
-    CreditCardDao creditCardDao;
+    public final CreditCardRepository creditCardRepository;
 
-    BufferedReader reader;
-
-    public CreditCardService(BufferedReader reader,  CreditCardDao creditCardDao) {
-        this.reader = reader;
-        this.creditCardDao = creditCardDao;
+    public CreditCardService(CreditCardRepository creditCardRepository) {
+        this.creditCardRepository = creditCardRepository;
     }
 
-    public void CreateCreditCard() throws SQLException, IOException {
+    public CreditCard2 createCreditCard(CreditCard2 creditCardBody) {
 
-
-        System.out.println("Type the card holder name: ");
-        String cardHolderName = reader.readLine();
-
-        System.out.println("Type the card number: ");
-        String cardNumber = reader.readLine();
-
-        System.out.println("Type the card expiry date (YYYY-MM):");
-        YearMonth expiryDateValue = YearMonth.parse(reader.readLine());
-
-        System.out.println("escreva o limite do seu cartão: ");
-        double limitValue = Double.parseDouble(reader.readLine());
-
-        try {
-            creditCardDao.insertCredit_Card(cardHolderName, cardNumber, expiryDateValue, limitValue );
-            System.out.println("Card registered successfully in the database!");
-        } catch (SQLException e) {
-            System.err.println("Error registering card: " + e.getMessage());
-        }
+        CreditCard2 creditcard = creditCardRepository.save(creditCardBody);
+        return creditcard;
     }
+
+    public CreditCard2 getCreditCardById(Long id){
+
+        Optional<CreditCard2> optionalCreditCard = creditCardRepository.findById(id);
+        return optionalCreditCard.orElse(null);
+    }
+
+
+
 }

@@ -1,15 +1,15 @@
 package JavaClasses.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import JavaClasses.Account2;
+import JavaClasses.Model.Account;
+
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
 public class AccountDao {
 
-    public void insertAccount (LocalDate birthday, String fullName, String email) throws SQLException {
+    public Account2 insertAccount (LocalDate birthday, String fullName, String email) throws SQLException {
         String query = "INSERT INTO account (email, full_name,day_of_birthday) values (?,?,?)";
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -20,6 +20,21 @@ public class AccountDao {
             preparedStatement.setDate(3, Date.valueOf(birthday));
 
             preparedStatement.executeUpdate();
+
+            Long id = null;
+            try(ResultSet getGeneratedKeys = preparedStatement.getGeneratedKeys()) {
+                if (getGeneratedKeys.next()) {
+                    id = getGeneratedKeys.getLong(1);
+                }
+
+                return new Account2(
+                        id,
+                        birthday,
+                        fullName,
+                        email
+                );
+
+            }
         }
     }
 
