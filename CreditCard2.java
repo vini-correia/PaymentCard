@@ -2,34 +2,42 @@ package JavaClasses;
 
 //import JavaClasses.anotations.LogExecution;
 
+import jakarta.persistence.*;
+
+import javax.lang.model.element.Name;
 import java.time.YearMonth;
 
+@Entity
+@Table(name = "credit_card")
 public class CreditCard2 {
 
+    @Id
+    @Column (name = "card_number")
     String cardNumber;
-    String cardHoderName;
-    YearMonth expiryDate;
+
+    @Column(name = "card_holder_name")
+    String cardHolderName;
+
+    @Column (name = "expiry_date")
+    String expiryDate;
+
+    @Column (name = "limit_amount")
     double limit;
 
+    @Column
     double balance;
 
     public CreditCard2() {
     }
 
-    public CreditCard2(String cardNumber, String cardHoderName, YearMonth expiryDate, double limit) {
+    public CreditCard2(String cardNumber, String cardHolderName, String expiryDate, double limit) {
         this.cardNumber = cardNumber;
-        this.cardHoderName = cardHoderName;
+        this.cardHolderName = cardHolderName;
         this.expiryDate = expiryDate;
         this.limit = limit;
+        this.balance = 0;
     }
 
-    public CreditCard2(String cardNumber, String cardHoderName, YearMonth expiryDate, double limit, double balance) {
-        this.cardNumber = cardNumber;
-        this.cardHoderName = cardHoderName;
-        this.expiryDate = expiryDate;
-        this.limit = limit;
-        this.balance = balance;
-    }
 
     public String getCardNumber() {
         return cardNumber;
@@ -39,19 +47,19 @@ public class CreditCard2 {
         this.cardNumber = cardNumber;
     }
 
-    public String getCardHoderName() {
-        return cardHoderName;
+    public String getCardHolderName() {
+        return cardHolderName;
     }
 
-    public void setCardHoderName(String cardHoderName) {
-        this.cardHoderName = cardHoderName;
+    public void setCardHolderName(String cardHoderName) {
+        this.cardHolderName = cardHoderName;
     }
 
-    public YearMonth getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(YearMonth expiryDate) {
+    public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
 
@@ -75,7 +83,7 @@ public class CreditCard2 {
     public String toString() {
         return "CreditCard2{" +
                 "cardNumber='" + cardNumber + '\'' +
-                ", cardHoderName='" + cardHoderName + '\'' +
+                ", cardHoderName='" + cardHolderName + '\'' +
                 ", expiryDate=" + expiryDate +
                 ", limit=" + limit +
                 ", balance=" + balance +

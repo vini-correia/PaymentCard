@@ -25,12 +25,6 @@ public class Account2 {
     public Account2() {
     }
 
-    public Account2(LocalDate birthDay, String fullName, String email) {
-        this.birthDay = birthDay;
-        this.fullName = fullName;
-        this.email = email;
-    }
-
     public LocalDate getDateOfBirthLocalDate() {
         return birthDay;
     }

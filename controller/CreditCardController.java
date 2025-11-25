@@ -5,13 +5,13 @@ import JavaClasses.Model.CreditCard;
 import JavaClasses.Service.CreditCardService;
 import JavaClasses.dao.CreditCardDao;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
-@RequestMapping("/api/v1/cards")
+@RequestMapping("/api/v1/credit-cards")
 
 public class CreditCardController {
 
@@ -22,9 +22,29 @@ public class CreditCardController {
     }
 
     @PostMapping
-    public ResponseEntity<CreditCard> addCreditCard(@RequestBody CreditCard creditCard) {
+    public ResponseEntity<CreditCard2> addCreditCard(@RequestBody CreditCard2 creditCardBody) {
 
-        CreditCard2 creditCard = creditCardService.createCredotCard(creditCardBody);
+        CreditCard2 creditCard = creditCardService.createCreditCard(creditCardBody);
+
+        URI location =  ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(creditCard.getCardNumber())
+                .toUri();
+
+        return ResponseEntity.created(location).body(creditCard);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CreditCard2> getCreditCard(@PathVariable("id") Long id) {
+        CreditCard2 creditcard = creditCardService.getCreditCardById(id);
+
+
+        if (creditcard != null) {
+            return ResponseEntity.ok(creditcard);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
