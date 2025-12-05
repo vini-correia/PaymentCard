@@ -1,30 +1,52 @@
 package JavaClasses.Model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "account")
 public class Account {
 
-    private LocalDate dayOfBrithdat;
-    private String fullName;
-    private String email;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "day_of_birthday")
+    private LocalDate birthDay;
+
+    @Column (name = "full_name")
+    private String fullName;
+
+    @Column
+    private String email;
 
     public Account() {
-
     }
 
-
-    public LocalDate getDayOfBrithdat() {
-        return dayOfBrithdat;
+    public LocalDate getDateOfBirthLocalDate() {
+        return birthDay;
     }
 
-    public void setDayOfBrithdat(LocalDate dayOfBrithdat) {
-        this.dayOfBrithdat = dayOfBrithdat;
+    public void setBirthDay(LocalDate birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public Account(long id, LocalDate birthDay, String fullName, String email) {
+        this.birthDay = birthDay;
+        this.fullName = fullName;
+        this.email = email;
+        this.id = id;
+
     }
 
     public String getFullName() {
         return fullName;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setFullName(String fullName) {
@@ -39,16 +61,12 @@ public class Account {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
         return "Account{" +
-        "data of birthday: " + dayOfBrithdat +
-        "}";
-
-
+                "dayeOfBirthLocalDate=" + birthDay +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
