@@ -1,10 +1,10 @@
 package JavaClasses.Service;
 
-import JavaClasses.CreditCard2;
+import JavaClasses.Model.CreditCard;
 import JavaClasses.repository.CreditCardRepository;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 
@@ -16,17 +16,32 @@ public class CreditCardService {
         this.creditCardRepository = creditCardRepository;
     }
 
-    public CreditCard2 createCreditCard(CreditCard2 creditCardBody) {
+    public CreditCard createCreditCard(CreditCard creditCardBody) {
 
-        CreditCard2 creditcard = creditCardRepository.save(creditCardBody);
+        CreditCard creditcard = creditCardRepository.save(creditCardBody);
         return creditcard;
     }
 
-    public CreditCard2 getCreditCardById(Long id){
+//    public CreditCard getCreditCardById(Long id){
+//
+//        //Optional<CreditCard> optionalCreditCard = creditCardRepository.findById(id);
+//        return optionalCreditCard.orElse(null);
+//    }
 
-        Optional<CreditCard2> optionalCreditCard = creditCardRepository.findById(id);
-        return optionalCreditCard.orElse(null);
+    public Optional<CreditCard> getCreditCardByNumber(String cardNumber) {
+        Optional<CreditCard> foundCard = creditCardRepository.findByCardNumber(cardNumber);
+
+        if(foundCard.isEmpty()){
+            System.out.println("No credit card found");
+            return Optional.empty();
+        }
+        return foundCard;
     }
+
+////    public CreditCard getCreditCardByEmail(String email) {
+////        Optional<CreditCard> foundCard = creditCardRepository.findByEmail(email);
+////        return foundCard.orElse(null);
+//    }
 
 
 

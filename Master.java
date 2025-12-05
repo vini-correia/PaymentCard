@@ -44,7 +44,7 @@
 //
 //            if(s.equalsIgnoreCase("1")) {
 //                CreditCard2 creditCard = new CreditCard2();
-//                Account2 account = new Account2();
+//                Account account = new Account();
 //                System.out.println("type the card number");
 //                creditCard.setCardNumber(reader.readLine());
 //                System.out.println("Card number is = " + creditCard.getCardNumber());
@@ -160,7 +160,7 @@
 //
 //                    updateCreditCardInDatabase(creditCard.getCardNumber(),creditCard.getBalance());
 //
-//                    System.out.println("saldo atualizado");
+//                    System.out.println("saldo atualizado")
 //                }
 //
 //

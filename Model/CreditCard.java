@@ -1,45 +1,63 @@
 package JavaClasses.Model;
 
 //import JavaClasses.anotations.LogExecution;
-import org.springframework.stereotype.Component;
 
-import java.time.YearMonth;
+import jakarta.persistence.*;
 
-@Component
+@Entity
+@Table(name = "credit_card")
+public class CreditCard{
 
-public class CreditCard {
+    @Id
+    @Column (name = "card_number")
+    String cardNumber;
 
-    private String cardHoldName;
-    private String cardHoldNumber;
-    private YearMonth expiryDate;
-    private double limit;
-    private double balance;
+    @Column(name = "card_holder_name")
+    String cardHolderName;
 
-    public CreditCard() {}
+    @Column (name = "expiry_date")
+    String expiryDate;
 
-    public CreditCard(String cardHoldName, String cardHoldNumber, YearMonth expiryDate, double balance, double limit ) {
-        this.cardHoldName = cardHoldName;
-        this.cardHoldNumber = cardHoldNumber;
+    @Column (name = "limit_amount")
+    Double limit;
+
+    @Column
+    Double balance;
+
+    public CreditCard() {
+    }
+
+    public CreditCard(String cardNumber, String cardHolderName, String expiryDate, double limit) {
+        this.cardNumber = cardNumber;
+        this.cardHolderName = cardHolderName;
         this.expiryDate = expiryDate;
         this.limit = limit;
-        this.balance = balance;
+        this.balance = null;
     }
 
-    public String getCardHolNumber() {
-        return cardHoldNumber;
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+    //@LogExecution()
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
-    //@LogExecution
-    public void setCardHolNumber(int cardHolNumber) {
-        this.cardHoldNumber = cardHoldNumber;
+    public String getCardHolderName() {
+        return cardHolderName;
     }
 
-    public String getCardHoldName() {
-        return cardHoldName;
+    public void setCardHolderName(String cardHoderName) {
+        this.cardHolderName = cardHoderName;
     }
 
-    public void setCardHoldName(String cardHoldName) {
-        this.cardHoldName = cardHoldName;
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
     public double getLimit() {
@@ -48,14 +66,6 @@ public class CreditCard {
 
     public void setLimit(double limit) {
         this.limit = limit;
-    }
-
-    public YearMonth getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(YearMonth expiryDate) {
-        this.expiryDate = expiryDate;
     }
 
     public double getBalance() {
@@ -68,13 +78,12 @@ public class CreditCard {
 
     @Override
     public String toString() {
-        return "CredtCard {" +
-                "Titular=" + cardHoldName + "\'" +
-                ", Numero=" + cardHoldNumber +
-                ", Validade=" + expiryDate +
-                ", Limite=" + limit +
-                ", Saldo=" + balance +
-                "}";
+        return "CreditCard2{" +
+                "cardNumber='" + cardNumber + '\'' +
+                ", cardHoderName='" + cardHolderName + '\'' +
+                ", expiryDate=" + expiryDate +
+                ", limit=" + limit +
+                ", balance=" + balance +
+                '}';
     }
-
 }

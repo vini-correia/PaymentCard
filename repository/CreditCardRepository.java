@@ -1,10 +1,13 @@
 package JavaClasses.repository;
 
-import JavaClasses.Account2;
-import JavaClasses.CreditCard2;
+import JavaClasses.Model.CreditCard;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CreditCardRepository extends CrudRepository<CreditCard2, Long> {
+public interface CreditCardRepository extends CrudRepository<CreditCard, String> {
+
+    Optional<CreditCard> findByCardNumber(String cardNumber);
+    //Optional<CreditCard> findByEmail(String email);
 }
