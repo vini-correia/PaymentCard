@@ -1,8 +1,10 @@
 package JavaClasses.Model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "account")
@@ -21,6 +23,10 @@ public class Account {
 
     @Column
     private String email;
+
+    @CreationTimestamp
+    @Column (name = "creation_date")
+    private LocalDateTime creationDate;
 
     public Account() {
     }

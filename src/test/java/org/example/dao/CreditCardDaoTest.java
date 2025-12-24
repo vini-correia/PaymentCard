@@ -1,4 +1,4 @@
-package Org.Test.dao;
+package org.example.dao;
 
 public class CreditCardDaoTest {
 }

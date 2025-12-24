@@ -17,7 +17,6 @@ public class CreditCardService {
     }
 
     public CreditCard createCreditCard(CreditCard creditCardBody) {
-
         CreditCard creditcard = creditCardRepository.save(creditCardBody);
         return creditcard;
     }
@@ -36,6 +35,10 @@ public class CreditCardService {
             return Optional.empty();
         }
         return foundCard;
+    }
+
+    public Optional<CreditCard> findByAccountEmail(String email) {
+        return creditCardRepository.buscarCartaoPeloEmail(email);
     }
 
 ////    public CreditCard getCreditCardByEmail(String email) {

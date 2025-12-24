@@ -1,4 +1,4 @@
-package Org.Test.dao;
+package org.example.dao;
 
 import JavaClasses.dao.AccountDao;
 import JavaClasses.dao.ConnectionFactory;
