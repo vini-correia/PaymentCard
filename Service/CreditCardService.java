@@ -4,6 +4,7 @@ import JavaClasses.Model.CreditCard;
 import JavaClasses.repository.CreditCardRepository;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import java.util.function.Function;
 
 
 @Service
@@ -17,7 +18,6 @@ public class CreditCardService {
     }
 
     public CreditCard createCreditCard(CreditCard creditCardBody) {
-
         CreditCard creditcard = creditCardRepository.save(creditCardBody);
         return creditcard;
     }
@@ -38,11 +38,36 @@ public class CreditCardService {
         return foundCard;
     }
 
-////    public CreditCard getCreditCardByEmail(String email) {
-////        Optional<CreditCard> foundCard = creditCardRepository.findByEmail(email);
-////        return foundCard.orElse(null);
-//    }
+    public Optional<CreditCard> findByAccountEmail(String email) {
+        return creditCardRepository.buscarCartaoPeloEmail(email);
+    }
 
+
+    public Optional<CreditCard> updateCreditCard(String cardNumber, CreditCard cardAtualizado) {
+
+        Optional<CreditCard> creditCardOptional = creditCardRepository.findById(cardNumber);
+        
+       if (creditCardOptional.isPresent())
+        {
+            creditCardOptional.get().setCardHolderName(cardAtualizado.getCardHolderName());
+
+            creditCardOptional.get().setLimit(cardAtualizado.getLimit());
+
+            CreditCard creditCardUpdated = creditCardRepository.save(creditCardOptional.get());
+            return Optional.of(creditCardUpdated);
+        }
+
+
+        return creditCardOptional;
+    }
+
+    public boolean deleteCreditCard(String cardNumber) {
+        if (creditCardRepository.existsById(cardNumber)) {
+            creditCardRepository.deleteById(cardNumber);
+            return true;
+        }
+        return false;
+    }
 
 
 }

@@ -2,6 +2,7 @@ package JavaClasses.Model;
 
 //import JavaClasses.anotations.LogExecution;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,6 +24,9 @@ public class CreditCard{
 
     @Column
     Double balance;
+
+    @Column(name = "account_id")
+    private Long accountId;
 
     public CreditCard() {
     }
@@ -68,12 +72,20 @@ public class CreditCard{
         this.limit = limit;
     }
 
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     @Override
