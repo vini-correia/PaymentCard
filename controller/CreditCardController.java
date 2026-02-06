@@ -46,27 +46,55 @@ public class CreditCardController {
 //        }
 //    }
 
-    @GetMapping("/number/{creditCardNumber}")
-    public ResponseEntity<String> getCreditCards(@PathVariable("creditCardNumber")  String creditCardNumber) {
-        return ResponseEntity.ok(creditCardNumber);
-
-    }
-
-    @GetMapping("/email/{email}")
-    public ResponseEntity<String> getByEmail(@PathVariable("email")  String email) {
-        return ResponseEntity.ok(email);
-    }
+//    @GetMapping("/number/{creditCardNumber}")
+//    public ResponseEntity<String> getCreditCards(@PathVariable("creditCardNumber")  String creditCardNumber) {
+//        return ResponseEntity.ok(creditCardNumber);
+//
+//    }
 
     @GetMapping("/holder/{cardHolderName}")
     public ResponseEntity<String> getByHolderName(@PathVariable("cardHolderName") String cardHolderName) {
         return ResponseEntity.ok(cardHolderName);
+
     }
 
-    @GetMapping("/{creditCardNumber}")
+    @GetMapping("/number/{creditCardNumber}")
     public ResponseEntity<CreditCard> getCreditCardByNumber(@PathVariable("creditCardNumber") String creditCardNumber) {
         Optional<CreditCard> creditCard = creditCardService.getCreditCardByNumber(creditCardNumber);
-        return ResponseEntity.ok(creditCard.get());
+        return creditCard.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<CreditCard> getByEmail (@RequestParam("email") String email) {
+        Optional<CreditCard> creditCardOptional = creditCardService.findByAccountEmail(email);
+        if (creditCardOptional.isPresent()) {
+            CreditCard creditCard = creditCardOptional.get();
+            return ResponseEntity.ok(creditCard);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{cardNumber}")
+    public ResponseEntity<CreditCard> updateCreditCard(
+            @PathVariable("cardNumber") String cardNumber,
+            @RequestBody CreditCard creditCardBody) {
+
+        Optional<CreditCard> updatedCard = creditCardService.updateCreditCard(cardNumber, creditCardBody);
+        return updatedCard.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{cardNumber}")
+    public ResponseEntity<Void> deleteCreditCard(@PathVariable("cardNumber") String cardNumber) {
+        boolean deleted = creditCardService.deleteCreditCard(cardNumber);
+
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
