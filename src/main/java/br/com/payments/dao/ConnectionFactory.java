@@ -1,4 +1,4 @@
-package JavaClasses.dao;
+package br.com.payments.dao;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

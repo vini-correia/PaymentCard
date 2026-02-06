@@ -1,8 +1,8 @@
-package JavaClasses;
+package br.com.payments;
 
-import JavaClasses.Model.Account;
-import JavaClasses.Model.CreditCard;
-import JavaClasses.dao.ConnectionFactory;
+import br.com.payments.Model.Account;
+import br.com.payments.Model.CreditCard;
+import br.com.payments.dao.ConnectionFactory;
 
 import java.sql.*;
 import java.io.BufferedReader;

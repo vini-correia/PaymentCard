@@ -1,4 +1,4 @@
-package JavaClasses.Model;
+package br.com.payments.Model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,6 +31,12 @@ public class Account {
     public Account() {
     }
 
+    public Account(String fullName, LocalDate birthDay, String email) {
+        this.fullName = fullName;
+        this.birthDay = birthDay;
+        this.email = email;
+    }
+
     public LocalDate getDateOfBirthLocalDate() {
         return birthDay;
     }
@@ -61,6 +67,10 @@ public class Account {
 
     public String getEmail() {
         return email;
+    }
+
+    public LocalDate getBirthDay() {
+        return birthDay;
     }
 
     public void setEmail(String email) {

@@ -1,4 +1,4 @@
-package JavaClasses.dao;
+package br.com.payments.dao;
 
 import java.sql.*;
 import java.time.YearMonth;

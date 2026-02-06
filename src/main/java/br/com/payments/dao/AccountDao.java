@@ -1,6 +1,6 @@
-package JavaClasses.dao;
+package br.com.payments.dao;
 
-import JavaClasses.Model.Account;
+import br.com.payments.Model.Account;
 
 import java.sql.*;
 import java.time.LocalDate;

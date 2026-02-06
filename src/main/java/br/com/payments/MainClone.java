@@ -1,10 +1,6 @@
-package JavaClasses;
+package br.com.payments;
 
 //import JavaClasses.Model.CreditCard;
-import JavaClasses.Service.AccountService;
-import JavaClasses.Service.CreditCardService;
-import JavaClasses.dao.AccountDao;
-import JavaClasses.dao.CreditCardDao;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -12,11 +8,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.sql.*;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 

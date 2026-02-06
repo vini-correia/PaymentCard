@@ -1,6 +1,6 @@
-package JavaClasses.repository;
+package br.com.payments.repository;
 
-import JavaClasses.Model.Account;
+import br.com.payments.Model.Account;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package JavaClasses.repository;
+package br.com.payments.repository;
 
-import JavaClasses.Model.CreditCard;
+import br.com.payments.Model.CreditCard;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface CreditCardRepository extends CrudRepository<CreditCard, String> {
 
     Optional<CreditCard> findByCardNumber(String cardNumber);
+    void deleteByAccountId(Long accountId);
 
     @Query("SELECT c FROM CreditCard c WHERE c.accountId IN (SELECT a.id FROM Account a WHERE a.email = :email)")
     Optional<CreditCard> buscarCartaoPeloEmail(@Param("email") String email);

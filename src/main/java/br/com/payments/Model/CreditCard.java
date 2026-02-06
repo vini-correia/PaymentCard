@@ -1,4 +1,4 @@
-package JavaClasses.Model;
+package br.com.payments.Model;
 
 //import JavaClasses.anotations.LogExecution;
 

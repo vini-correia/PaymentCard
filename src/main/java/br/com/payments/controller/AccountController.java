@@ -1,7 +1,7 @@
-package JavaClasses.controller;
+package br.com.payments.controller;
 
-import JavaClasses.Model.Account;
-import JavaClasses.Service.AccountService;
+import br.com.payments.Model.Account;
+import br.com.payments.Service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -38,6 +38,17 @@ public class AccountController {
 
         if (account != null) {
             return ResponseEntity.ok(account);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAccount(@PathVariable("id") Long accountId) {
+        boolean deleted = accountService.deleteAccount (accountId);
+
+        if (deleted) {
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }

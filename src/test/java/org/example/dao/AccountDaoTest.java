@@ -1,7 +1,7 @@
 package org.example.dao;
 
-import JavaClasses.dao.AccountDao;
-import JavaClasses.dao.ConnectionFactory;
+import br.com.payments.dao.AccountDao;
+import br.com.payments.dao.ConnectionFactory;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 

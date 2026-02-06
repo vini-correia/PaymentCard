@@ -1,6 +1,6 @@
 package org.example;
 
-import JavaClasses.dao.ConnectionFactory;
+import br.com.payments.dao.ConnectionFactory;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 

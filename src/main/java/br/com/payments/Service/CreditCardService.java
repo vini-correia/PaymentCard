@@ -1,7 +1,7 @@
-package JavaClasses.Service;
+package br.com.payments.Service;
 
-import JavaClasses.Model.CreditCard;
-import JavaClasses.repository.CreditCardRepository;
+import br.com.payments.Model.CreditCard;
+import br.com.payments.repository.CreditCardRepository;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
@@ -41,11 +41,32 @@ public class CreditCardService {
         return creditCardRepository.buscarCartaoPeloEmail(email);
     }
 
-////    public CreditCard getCreditCardByEmail(String email) {
-////        Optional<CreditCard> foundCard = creditCardRepository.findByEmail(email);
-////        return foundCard.orElse(null);
-//    }
 
+    public Optional<CreditCard> updateCreditCard(String cardNumber, CreditCard cardAtualizado) {
+
+        Optional<CreditCard> creditCardOptional = creditCardRepository.findById(cardNumber);
+        
+       if (creditCardOptional.isPresent())
+        {
+            creditCardOptional.get().setCardHolderName(cardAtualizado.getCardHolderName());
+
+            creditCardOptional.get().setLimit(cardAtualizado.getLimit());
+
+            CreditCard creditCardUpdated = creditCardRepository.save(creditCardOptional.get());
+            return Optional.of(creditCardUpdated);
+        }
+
+
+        return creditCardOptional;
+    }
+
+    public boolean deleteCreditCard(String cardNumber) {
+        if (creditCardRepository.existsById(cardNumber)) {
+            creditCardRepository.deleteById(cardNumber);
+            return true;
+        }
+        return false;
+    }
 
 
 }
